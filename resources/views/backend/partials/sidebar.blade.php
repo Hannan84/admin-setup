@@ -115,7 +115,7 @@
 						</a>
 						<ul class="submenu">
 							<li><a href="basic-table.html">Basic Tables</a></li>
-							<li><a href="datatable.html">DataTables</a></li>
+							<li><a href="{{ url('/users') }}">User DataTables</a></li>
 						</ul>
 					</li>
 					<li>
