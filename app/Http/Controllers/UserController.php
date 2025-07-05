@@ -22,4 +22,14 @@ class UserController extends Controller
 
     return view('backend.dashboard.dashboard');
     }
+
+    public function adminOnlyUsers()
+    {
+        $users = User::select('id', 'name', 'email')->get();
+
+        return response()->json([
+            'message' => 'Admin access confirmed.',
+            'users' => $users
+        ]);
+    }
 }

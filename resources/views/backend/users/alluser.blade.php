@@ -49,10 +49,10 @@
 							</thead>
 							<tbody>
 								<tr>
-                                    <td>1</td>
-									<td class="table-plus">Gloria F. Mead</td>
-									<td>gloria@example.com</td>
-                                    <td>2023-10-01</td>
+                                    <td></td>
+									<td class="table-plus"></td>
+									<td></td>
+                                    <td></td>
 								</tr>
 								
 							</tbody>
@@ -66,21 +66,24 @@
 
 @push('scripts')
 <script>
-    $(document).ready(function() {
-        console.log('jQuery Version:', $.fn.jquery);
-console.log('DataTable Function:', typeof $.fn.DataTable);
-        
-        $('#users-table').DataTable({
-            processing: true,
-            serverSide: true,
-            ajax: "{{ route('users.data') }}",
-            columns: [
-                { data: 'id', name: 'id' },
-                { data: 'name', name: 'name' },
-                { data: 'email', name: 'email' },
-                { data: 'created_at', name: 'created_at' }
-            ]
-        });
+$(document).ready(function () {
+    let $table = $('#users-table');
+
+    if ( $.fn.DataTable.isDataTable($table) ) {
+        $table.DataTable().clear().destroy(); // Destroy existing instance if any
+    }
+
+    $table.DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: "{{ route('users.data') }}",
+        columns: [
+            { data: 'id', name: 'id' },
+            { data: 'name', name: 'name' },
+            { data: 'email', name: 'email' },
+            { data: 'created_at', name: 'created_at' }
+        ]
     });
+});
 </script>
 @endpush
